@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Employee</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 30px auto; padding: 0 16px; background: #f5f6f8; }
+        h1 { color: #1f2a44; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
+        .field { margin-bottom: 12px; }
+        label { display: block; font-weight: bold; margin-bottom: 4px; }
+        input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .error { color: #c0392b; font-size: 13px; margin-top: 4px; }
+        button, .btn { padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 14px; display: inline-block; }
+        .btn-primary { background: #2d6cdf; color: #fff; }
+        .btn-cancel { background: #888; color: #fff; }
+    </style>
+</head>
+<body>
+
+<h1>Edit Employee</h1>
+
+<div class="card">
+    <form th:action="@{/employees/{id}/update(id=${employee.id})}" th:object="${employee}" method="post" novalidate>
+        <div class="field">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" th:field="*{fullName}">
+            <div class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+        </div>
+        <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{email}">
+            <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+        <div class="field">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" th:field="*{phone}">
+            <div class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+        </div>
+        <div class="field">
+            <label for="department">Department</label>
+            <input type="text" id="department" th:field="*{department}">
+            <div class="error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></div>
+        </div>
+        <div class="field">
+            <label for="salary">Salary</label>
+            <input type="number" step="0.01" id="salary" th:field="*{salary}">
+            <div class="error" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
+        </div>
+        <button type="submit" class="btn-primary">Update Employee</button>
+        <a class="btn btn-cancel" th:href="@{/employees}">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>
